@@ -4,22 +4,18 @@ import java.io.*;
 
 public class TextFileReader {
 
-    public static void main( String[] args ) throws IOException {
+    public static void main(String[] args) throws IOException {
 
-        {
-            FileReader fr = new FileReader("Currencies.txt");
-            BufferedReader br = new BufferedReader(fr);
+        FileReader fr = new FileReader("Currencies.txt");
+        BufferedReader br = new BufferedReader(fr);
 
-            String zeile = "";
+        String zeile;
 
-            while( (zeile = br.readLine()) != null )
-            {
-                System.out.println(zeile);
-            }
-
-            br.close();
-
+        while ((zeile = br.readLine()) != null) {
+            System.out.println(zeile);
         }
+
+        br.close();
 
     }
 }

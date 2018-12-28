@@ -19,7 +19,6 @@ public class Driver {
         System.out.println("\n");
 
 
-
         try (Scanner menuInput = new Scanner(System.in)) {
 
 
@@ -65,10 +64,9 @@ public class Driver {
 
         System.out.print("Enter a currency's name or a part of it(>>xxx<< to exit): ");
 
-        try (Scanner secondMenuInput = new Scanner(System.in)){
+        try (Scanner secondMenuInput = new Scanner(System.in)) {
 
         }
-
 
 
     }
