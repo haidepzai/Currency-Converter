@@ -1,6 +1,8 @@
 package de.hdm_stuttgart.mi.sd1;
 
+import java.io.IOException;
 import java.util.Scanner;
+
 
 public class Driver {
 
@@ -52,7 +54,7 @@ public class Driver {
 
                         System.exit(0);
                     default:
-                        System.out.println("Not a valid option!");
+                        System.err.println("Not a valid option!");
                         wrongInput = true;
                 }
 
@@ -66,6 +68,16 @@ public class Driver {
 
         try (Scanner secondMenuInput = new Scanner(System.in)) {
 
+            //Read file and return content as Array
+            TextFileReader tfr = new TextFileReader();
+            tfr.readFile("Currencies.txt");
+
+            String inputValue = secondMenuInput.nextLine();
+
+            //TODO: How to search through the Array for the inputValue and print out the found currencies?
+
+        } catch (IOException e) {
+            System.err.println("File not found!");
         }
 
 
