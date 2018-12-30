@@ -12,7 +12,7 @@ public class Driver {
          * Creates a menu
          *
          */
-        System.out.println(" Currency to buy: not set");
+        System.out.println("Currency to buy: not set");
         System.out.println("Currency to sell: not set");
         System.out.println("+++++++++++++++++++++++++");
         System.out.println("0: Select currency to buy");
@@ -35,12 +35,29 @@ public class Driver {
 
                 System.out.print("Please choose an option (>>x<< to exit): ");
 
-                String inputValue = menuInput.nextLine();
+                String inputValue = menuInput.next();
 
                 switch (inputValue) {
 
                     case "0":
                         wrongInput = false;
+                        System.out.print("Enter a currency's name or a part of it(>>xxx<< to exit): ");
+                        String buy = menuInput.next();
+
+                        //Read file and return content as Array
+                        TextFileReader tfr = new TextFileReader();
+                        tfr.readFile("Currencies.txt");
+
+                        //Currencies which contain the entered String will be output
+                        //TODO: Too much references? Put this stuff back to TextFileReader-class?
+
+                        int t = 0;
+                        for (int i = 0; i < tfr.currArray.length; i++) {
+                            if (tfr.currArray[i].toLowerCase().contains(buy.toLowerCase())) {
+                                System.out.println(t + ": " + tfr.getCurrencyName(tfr.currArray[i]));
+                                t++;
+                            }
+                        }
                         break;
                     case "1":
                         wrongInput = false;
@@ -49,38 +66,18 @@ public class Driver {
                         wrongInput = false;
                         break;
                     case "x":
-                        wrongInput = false;
                         System.out.println("You have terminated the currency converter!");
-
                         System.exit(0);
                     default:
                         System.err.println("Not a valid option!");
                         wrongInput = true;
+                        break;
                 }
-
 
             } while (wrongInput == true);
 
+        } catch (IOException i) {
+            System.err.println("Currencies.txt-file not found!");
         }
-
-
-        System.out.print("Enter a currency's name or a part of it(>>xxx<< to exit): ");
-
-        try (Scanner secondMenuInput = new Scanner(System.in)) {
-
-            //Read file and return content as Array
-            TextFileReader tfr = new TextFileReader();
-            tfr.readFile("Currencies.txt");
-
-            String inputValue = secondMenuInput.nextLine();
-
-            //TODO: How to search through the Array for the inputValue and print out the found currencies?
-
-        } catch (IOException e) {
-            System.err.println("File not found!");
-        }
-
-
     }
-
 }
