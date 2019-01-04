@@ -1,11 +1,21 @@
 package de.hdm_stuttgart.mi.sd1;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Driver {
 
+    static String toBuy1 = " Currency to buy: ";
+    static String toSell1 = "Currency to sell: ";
+    static String toBuy2 = "not set";
+    static String toSell2 = "not set";
+    static double amountToBuy = 0;
+    static double amountToSell = 0;
+
+    @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
 
         //TODO: ---------------------------------------------------------------------
@@ -17,8 +27,6 @@ public class Driver {
          *
          */
         boolean wrongInput = false;
-        String setCurrencyToBuy = "not set";
-        String setCurrencyToSell = "not set";
 
         try (Scanner menuInput = new Scanner(System.in)) {
 
@@ -27,84 +35,160 @@ public class Driver {
              * do-while loop for the menu selection
              *
              */
+            while (true) {
 
-            do {
-                System.out.println(" Currency to buy: " + setCurrencyToBuy);
-                System.out.println("Currency to sell: " + setCurrencyToSell);
-                System.out.println("+++++++++++++++++++++++++");
-                System.out.println("0: Select currency to buy");
-                System.out.println("1: Select currency to sell");
-                System.out.println("2: Select amount to be converted");
-                System.out.println("\n");
-                System.out.print("Please choose an option (>>x<< to exit): ");
-
-                String inputValue = menuInput.next();
-
-                switch (inputValue) {
-
-                    case "0":
-                        wrongInput = false;
-                        break;
-                    case "1":
-                        wrongInput = false;
-                        break;
-                    case "2":
-                        wrongInput = false;
-                        break;
-                    case "x":
-                        System.out.println("You have terminated the currency converter!");
-                        System.exit(0);
-                    default:
-                        System.err.println("Not a valid option! Try again!");
-                        wrongInput = true;
-                        break;
-                }
-
-            } while (wrongInput == true);
-
-            do {
-
-                System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
-                String buy = menuInput.next();
-
-                if (buy.equals("xxx")) {
-                    System.out.println("You have terminated the currency converter!");
-                    System.exit(0);
-                } else {
-                    //Read file and return content as Array
-                    TextFileReader tfr = new TextFileReader();
-                    tfr.readFile("Currencies.txt");
-
-                    //Currencies which contain the entered String will be output
-                    //TODO: Too much references? Put this stuff back to TextFileReader-class?
-
-                    System.out.println("\n Currency to buy: " + setCurrencyToBuy);
-                    System.out.println("Currency to sell: " + setCurrencyToSell);
+                do {
+                    System.out.println(toBuy1 + toBuy2);
+                    System.out.println(toSell1 + toSell2);
                     System.out.println("+++++++++++++++++++++++++");
+                    System.out.println("0: Select currency to buy");
+                    System.out.println("1: Select currency to sell");
+                    System.out.println("2: Select amount to be converted");
+                    System.out.println("\n");
+                    System.out.print("Please choose an option (>>x<< to exit): ");
 
-                    int t = 0;
-                    for (int i = 0; i < tfr.currArray.length; i++) {
-                        if (tfr.currArray[i].toLowerCase().contains(buy.toLowerCase())) {
-                            System.out.println(t + ": " + tfr.getCurrencyName(tfr.currArray[i]));
-                            t++;
-                        }
+                    String inputValue = menuInput.next();
+
+                    switch (inputValue) {
+
+                        //Select currencies to buy/sell
+                        case "0":
+                        case "1":
+
+                            do {
+                                System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
+                                String buy = menuInput.next();
+
+                                if (buy.equals("xxx")) {
+                                    System.out.println("You have terminated the currency converter!");
+                                    System.exit(0);
+                                } else {
+                                    //Read file and return content as Array
+                                    TextFileReader tfr = new TextFileReader();
+                                    tfr.readFile("Currencies.txt");
+
+                                    /**
+                                     * Search in the currArray for currencies which contain the entered String
+                                     */
+
+                                    int nC = 0; //nC: Variable for the number of found currencies
+                                    List<String> foundCurrencies = new ArrayList<>();
+
+                                    for (int i = 0; i < tfr.currArray.length; i++) {
+                                        if (tfr.currArray[i].toLowerCase().contains(buy.toLowerCase())) {
+                                            foundCurrencies.add(tfr.currArray[i]);
+                                            nC++;
+                                        }
+                                    }
+                                    String[] foundArray = foundCurrencies.toArray(new String[0]);
+
+                                    //If no currency found
+                                    if (nC == 0) {
+                                        System.err.println("No suitable currencies found! Try again!\n");
+                                        wrongInput = true;
+
+                                    //If just one currency found
+                                    } else if (nC == 1) {
+                                        if (inputValue.equals("0")) {
+                                            toBuy2 = tfr.getCurrencyName(foundCurrencies.get(0));
+                                        } else if (inputValue.equals("1")) {
+                                            toSell2 = tfr.getCurrencyName(foundCurrencies.get(0));
+                                        }
+
+                                        System.out.println("\n");
+
+                                        if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
+                                            toBuy1 = "Buying " + amountToBuy + " of ";
+                                            toSell1 = "Selling " + amountToSell + " of ";
+                                        }
+
+                                        wrongInput = false;
+
+                                    //If more than one currency is found
+                                    } else {
+                                        System.out.println("\n" + toBuy1 + toBuy2);
+                                        System.out.println(toSell1 + toSell2);
+                                        System.out.println("+++++++++++++++++++++++++");
+
+                                        //Print out the Array of found currencies
+                                        int t = 0;
+                                        for (String fA : foundArray) {
+                                            System.out.println(t + ": " + tfr.getCurrencyName(fA));
+                                            t++;
+                                        }
+
+                                        do {
+                                            System.out.println("\n");
+                                            System.out.print("Select a currency by index: ");
+                                            Integer selectCurrency = menuInput.nextInt();
+
+                                            //Overwrite "Currency to buy/sell" with the selected currency
+                                            try {
+                                                if (inputValue.equals("0")) {
+                                                    toBuy2 = tfr.getCurrencyName(foundCurrencies.get(selectCurrency));
+                                                } else if (inputValue.equals("1")) {
+                                                    toSell2 = tfr.getCurrencyName(foundCurrencies.get(selectCurrency));
+                                                }
+
+                                                System.out.println("\n");
+
+                                                if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
+                                                    toBuy1 = "Buying " + amountToBuy + " of ";
+                                                    toSell1 = "Selling " + amountToSell + " of ";
+                                                }
+
+                                                wrongInput = false;
+                                            } catch (IndexOutOfBoundsException b) {
+                                                System.err.println("Your index was too high!");
+                                                wrongInput = true;
+                                            }
+
+                                        } while (wrongInput == true);
+
+                                    }
+
+                                }
+
+                            } while (wrongInput == true);
+
+
+                            wrongInput = false;
+                            break;
+
+                        //Select an amount which shall be converted
+                        case "2":
+                            System.out.print("Enter an amount: ");
+                            double amount = menuInput.nextDouble();
+                            System.out.println("\n");
+
+                            amountToBuy = amount;
+                            Calculator calc = new Calculator();
+                            //TODO: Select the SDR values of the chosen currencies !
+                            //amountToSell = calc.convertingAmount(amount; ... ; ...);
+
+                            wrongInput = false;
+                            break;
+
+                        //Exit the currency converter
+                        case "x":
+                            System.out.println("You have terminated the currency converter!");
+                            System.exit(0);
+
+                        default:
+                            System.err.println("Not a valid option! Try again!");
+                            wrongInput = true;
+                            break;
+
                     }
-                    if (t == 0) {
-                        System.err.println("No suitable currencies found! Try again!\n");
-                        wrongInput = true;
-                    } else {
-                        System.out.println("\n");
-                        System.out.println("Select a currency by index: ");
-                        wrongInput = false;
-                        //TODO: Overwrite setCurrencyToBuy or setCurrencyToSell with the selected currency
-                    }
-                }
 
-            } while (wrongInput == true);
+                } while (wrongInput == true);
 
+            }
 
-        } catch (IOException e) {
+        } catch (IOException i) {
             System.err.println("Currencies.txt-file not found!");
         }
     }
 }
+
+

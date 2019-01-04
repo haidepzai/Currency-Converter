@@ -2,7 +2,7 @@ package de.hdm_stuttgart.mi.sd1;
 
 public class Calculator {
 
-    float result;
+    double result;
 
     /**
      * Algorithm to convert an amount of one currency to another with the help of their SDR values
@@ -13,7 +13,7 @@ public class Calculator {
      * @return The converted amount
      */
 
-    public float convertingAmount (float amount, float buySDR, float sellSDR) {
+    public double convertingAmount (double amount, double buySDR, double sellSDR) {
 
         result = (amount/buySDR)*sellSDR;
         return result;
