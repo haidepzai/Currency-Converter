@@ -15,6 +15,9 @@ public class Driver {
     static double amountToBuy = 0;
     static double amountToSell = 0;
 
+    static String buyCurrency;
+    static String sellCurrency;
+
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
 
@@ -26,6 +29,11 @@ public class Driver {
          * Creates a menu
          *
          */
+
+        TextFileReader tfr = new TextFileReader();
+        SplitArray splitArray = new SplitArray();
+
+
         boolean wrongInput = false;
 
         try (Scanner menuInput = new Scanner(System.in)) {
@@ -38,6 +46,12 @@ public class Driver {
             while (true) {
 
                 do {
+
+                    if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
+                        toBuy1 = "Buying " + amountToBuy + " of ";
+                        toSell1 = "Selling " + amountToSell + " of ";
+                    }
+
                     System.out.println(toBuy1 + toBuy2);
                     System.out.println(toSell1 + toSell2);
                     System.out.println("+++++++++++++++++++++++++");
@@ -64,7 +78,7 @@ public class Driver {
                                     System.exit(0);
                                 } else {
                                     //Read file and return content as Array
-                                    TextFileReader tfr = new TextFileReader();
+
                                     tfr.readFile("Currencies.txt");
 
                                     /**
@@ -90,9 +104,12 @@ public class Driver {
                                     //If just one currency found
                                     } else if (nC == 1) {
                                         if (inputValue.equals("0")) {
-                                            toBuy2 = tfr.getCurrencyName(foundCurrencies.get(0));
+                                            buyCurrency = foundCurrencies.get(0);
+                                            toBuy2 = splitArray.getCurrencyName(buyCurrency);
+
                                         } else if (inputValue.equals("1")) {
-                                            toSell2 = tfr.getCurrencyName(foundCurrencies.get(0));
+                                            sellCurrency = foundCurrencies.get(0);
+                                            toSell2 = splitArray.getCurrencyName(sellCurrency);
                                         }
 
                                         System.out.println("\n");
@@ -113,21 +130,23 @@ public class Driver {
                                         //Print out the Array of found currencies
                                         int t = 0;
                                         for (String fA : foundArray) {
-                                            System.out.println(t + ": " + tfr.getCurrencyName(fA));
+                                            System.out.println(t + ": " + splitArray.getCurrencyName(fA));
                                             t++;
                                         }
 
                                         do {
                                             System.out.println("\n");
                                             System.out.print("Select a currency by index: ");
-                                            Integer selectCurrency = menuInput.nextInt();
+                                            int selectCurrency = menuInput.nextInt();
 
                                             //Overwrite "Currency to buy/sell" with the selected currency
                                             try {
                                                 if (inputValue.equals("0")) {
-                                                    toBuy2 = tfr.getCurrencyName(foundCurrencies.get(selectCurrency));
+                                                    buyCurrency = foundCurrencies.get(selectCurrency);
+                                                    toBuy2 = splitArray.getCurrencyName(buyCurrency);
                                                 } else if (inputValue.equals("1")) {
-                                                    toSell2 = tfr.getCurrencyName(foundCurrencies.get(selectCurrency));
+                                                    sellCurrency = foundCurrencies.get(selectCurrency);
+                                                    toSell2 = splitArray.getCurrencyName(sellCurrency);
                                                 }
 
                                                 System.out.println("\n");
@@ -161,10 +180,13 @@ public class Driver {
                             double amount = menuInput.nextDouble();
                             System.out.println("\n");
 
-                            amountToBuy = amount;
                             Calculator calc = new Calculator();
-                            //TODO: Select the SDR values of the chosen currencies !
-                            //amountToSell = calc.convertingAmount(amount; ... ; ...);
+
+                            double buyVal = Double.parseDouble(splitArray.getCurrencyValue(buyCurrency));
+                            double sellVal = Double.parseDouble(splitArray.getCurrencyValue(sellCurrency));
+
+                            amountToBuy = amount;
+                            amountToSell = calc.convertingAmount(amount, buyVal , sellVal);
 
                             wrongInput = false;
                             break;

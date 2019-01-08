@@ -9,7 +9,7 @@ import java.util.List;
 public class TextFileReader {
 
     /**
-     *  Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
+     * Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
      */
 
     String[] currArray;
@@ -28,12 +28,4 @@ public class TextFileReader {
         return currArray = currList.toArray(new String[0]);
     }
 
-    /**
-     * Get only the first part of an Array's entry, the name of a currency
-     * @param currency Variable which represents an entire entry
-     * @return Return only the name of a currency by cutting the the value of the currency after the ":"
-     */
-    public String getCurrencyName(String currency) {
-        return currency.substring(0,currency.indexOf(':'));
-    }
 }
