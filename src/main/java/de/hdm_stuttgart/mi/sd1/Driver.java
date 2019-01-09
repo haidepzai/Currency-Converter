@@ -18,6 +18,8 @@ public class Driver {
     static String buyCurrency;
     static String sellCurrency;
 
+    static String[] foundArray;
+
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
 
@@ -32,6 +34,7 @@ public class Driver {
 
         TextFileReader tfr = new TextFileReader();
         SplitArray splitArray = new SplitArray();
+        ArraySearch arraySearch = new ArraySearch();
 
 
         boolean wrongInput = false;
@@ -71,44 +74,34 @@ public class Driver {
 
                             do {
                                 System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
-                                String buy = menuInput.next();
+                                String enteredName = menuInput.next();
 
-                                if (buy.equals("xxx")) {
+                                if (enteredName.equals("xxx")) {
                                     System.out.println("You have terminated the currency converter!");
                                     System.exit(0);
                                 } else {
                                     //Read file and return content as Array
 
-                                    tfr.readFile("Currencies.txt");
+                                    String[] currArray = tfr.readFile("Currencies.txt");
 
                                     /**
                                      * Search in the currArray for currencies which contain the entered String
                                      */
 
-                                    int nC = 0; //nC: Variable for the number of found currencies
-                                    List<String> foundCurrencies = new ArrayList<>();
+                                    foundArray = arraySearch.searchEnteredName(enteredName, currArray);
 
-                                    for (int i = 0; i < tfr.currArray.length; i++) {
-                                        if (tfr.currArray[i].toLowerCase().contains(buy.toLowerCase())) {
-                                            foundCurrencies.add(tfr.currArray[i]);
-                                            nC++;
-                                        }
-                                    }
-                                    String[] foundArray = foundCurrencies.toArray(new String[0]);
-
-                                    //If no currency found
-                                    if (nC == 0) {
+                                    if (arraySearch.nC == 0) {
                                         System.err.println("No suitable currencies found! Try again!\n");
                                         wrongInput = true;
 
                                     //If just one currency found
-                                    } else if (nC == 1) {
+                                    } else if (arraySearch.nC == 1) {
                                         if (inputValue.equals("0")) {
-                                            buyCurrency = foundCurrencies.get(0);
+                                            buyCurrency = foundArray[0];
                                             toBuy2 = splitArray.getCurrencyName(buyCurrency);
 
                                         } else if (inputValue.equals("1")) {
-                                            sellCurrency = foundCurrencies.get(0);
+                                            sellCurrency = foundArray[0];
                                             toSell2 = splitArray.getCurrencyName(sellCurrency);
                                         }
 
@@ -122,7 +115,7 @@ public class Driver {
                                         wrongInput = false;
 
                                     //If more than one currency is found
-                                    } else {
+                                    } else if (arraySearch.nC >= 2){
                                         System.out.println("\n" + toBuy1 + toBuy2);
                                         System.out.println(toSell1 + toSell2);
                                         System.out.println("+++++++++++++++++++++++++");
@@ -142,10 +135,10 @@ public class Driver {
                                             //Overwrite "Currency to buy/sell" with the selected currency
                                             try {
                                                 if (inputValue.equals("0")) {
-                                                    buyCurrency = foundCurrencies.get(selectCurrency);
+                                                    buyCurrency = foundArray[selectCurrency];
                                                     toBuy2 = splitArray.getCurrencyName(buyCurrency);
                                                 } else if (inputValue.equals("1")) {
-                                                    sellCurrency = foundCurrencies.get(selectCurrency);
+                                                    sellCurrency = foundArray[selectCurrency];
                                                     toSell2 = splitArray.getCurrencyName(sellCurrency);
                                                 }
 
@@ -182,8 +175,11 @@ public class Driver {
 
                             Calculator calc = new Calculator();
 
-                            double buyVal = Double.parseDouble(splitArray.getCurrencyValue(buyCurrency));
-                            double sellVal = Double.parseDouble(splitArray.getCurrencyValue(sellCurrency));
+                            //TODO: ---------------------------------------
+                            //TODO: In SplitArray-class
+                            double buyVal = splitArray.getCurrencyValue(buyCurrency);
+                            double sellVal = splitArray.getCurrencyValue(sellCurrency);
+                            //TODO: ----------------------------------------
 
                             amountToBuy = amount;
                             amountToSell = calc.convertingAmount(amount, buyVal , sellVal);
