@@ -101,7 +101,7 @@ public class Driver {
                                         System.err.println("No suitable currencies found! Try again!\n");
                                         wrongInput = true;
 
-                                    //If just one currency found
+                                        //If just one currency found
                                     } else if (nC == 1) {
                                         if (inputValue.equals("0")) {
                                             buyCurrency = foundCurrencies.get(0);
@@ -121,7 +121,7 @@ public class Driver {
 
                                         wrongInput = false;
 
-                                    //If more than one currency is found
+                                        //If more than one currency is found
                                     } else {
                                         System.out.println("\n" + toBuy1 + toBuy2);
                                         System.out.println(toSell1 + toSell2);
@@ -137,33 +137,47 @@ public class Driver {
                                         do {
                                             System.out.println("\n");
                                             System.out.print("Select a currency by index: ");
-                                            int selectCurrency = menuInput.nextInt();
+                                            Boolean validTest = true;
+                                            do {
+                                                                                            //Todo: Try-Catch anstatt regex
+                                                String validCurrency = menuInput.next();
+                                                if (validCurrency.matches("[0-9]+$") && validCurrency.length() > 0){
 
-                                            //Overwrite "Currency to buy/sell" with the selected currency
-                                            try {
-                                                if (inputValue.equals("0")) {
-                                                    buyCurrency = foundCurrencies.get(selectCurrency);
-                                                    toBuy2 = splitArray.getCurrencyName(buyCurrency);
-                                                } else if (inputValue.equals("1")) {
-                                                    sellCurrency = foundCurrencies.get(selectCurrency);
-                                                    toSell2 = splitArray.getCurrencyName(sellCurrency);
+                                                    int selectCurrency = Integer.parseInt(validCurrency);
+
+                                                    //Overwrite "Currency to buy/sell" with the selected currency
+                                                    try {
+                                                        if (inputValue.equals("0")) {
+                                                            buyCurrency = foundCurrencies.get(selectCurrency);
+                                                            toBuy2 = splitArray.getCurrencyName(buyCurrency);
+                                                        } else if (inputValue.equals("1")) {
+                                                            sellCurrency = foundCurrencies.get(selectCurrency);
+                                                            toSell2 = splitArray.getCurrencyName(sellCurrency);
+                                                        }
+
+                                                        System.out.println("\n");
+
+                                                        if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
+                                                            toBuy1 = "Buying " + amountToBuy + " of ";
+                                                            toSell1 = "Selling " + amountToSell + " of ";
+                                                        }
+
+                                                        wrongInput = false;
+                                                    } catch (IndexOutOfBoundsException b) {
+                                                        System.err.println("Your index was too high!");
+                                                        wrongInput = true;
+                                                    }
+                                                    validTest = false;
+                                                } else {
+
+                                                    System.out.println("Not a valid Number!\nTry again.");
+
                                                 }
 
-                                                System.out.println("\n");
 
-                                                if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
-                                                    toBuy1 = "Buying " + amountToBuy + " of ";
-                                                    toSell1 = "Selling " + amountToSell + " of ";
-                                                }
+                                            } while(validTest == true);
 
-                                                wrongInput = false;
-                                            } catch (IndexOutOfBoundsException b) {
-                                                System.err.println("Your index was too high!");
-                                                wrongInput = true;
-                                            }
-
-                                        } while (wrongInput == true);
-
+                                        }while (wrongInput == true);
                                     }
 
                                 }
@@ -175,21 +189,50 @@ public class Driver {
                             break;
 
                         //Select an amount which shall be converted
-                        case "2":
-                            System.out.print("Enter an amount: ");
-                            double amount = menuInput.nextDouble();
-                            System.out.println("\n");
+                        case "2":      //Todo: Try-Catch anstatt regex
+                            Boolean validTest = true;
+                            if(buyCurrency == null) {
+                                System.out.println("\nYou have to select a currency to buy first!\n");
 
-                            Calculator calc = new Calculator();
+                            }else if (sellCurrency == null) {
 
-                            double buyVal = Double.parseDouble(splitArray.getCurrencyValue(buyCurrency));
-                            double sellVal = Double.parseDouble(splitArray.getCurrencyValue(sellCurrency));
+                                System.out.println("\nYou have to select a currency to sell first!\n");
 
-                            amountToBuy = amount;
-                            amountToSell = calc.convertingAmount(amount, buyVal , sellVal);
+                            }
+                            if (buyCurrency == null && sellCurrency == null) {
 
-                            wrongInput = false;
-                            break;
+                               System.out.println("\nYou have to select a currency to buy and to sell first!\n");
+                                    break;
+                            } else {
+                                do {
+                                    System.out.print("Enter an amount: ");
+
+                                    String validAmount = menuInput.next();
+
+                                    if (validAmount.matches("^[0-9]+[.]?[0-9]*$") && validAmount.length() > 0) {
+
+                                        double amount = Double.parseDouble(validAmount);
+
+                                        System.out.println("\n");
+
+                                        Calculator calc = new Calculator();
+
+                                        double buyVal = Double.parseDouble(splitArray.getCurrencyValue(buyCurrency));
+                                        double sellVal = Double.parseDouble(splitArray.getCurrencyValue(sellCurrency));
+
+                                        amountToBuy = amount;
+                                        amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
+
+                                        wrongInput = false;
+                                        validTest = false;
+                                    } else {
+                                        System.out.println("Not a valid amount");
+                                    }
+
+                                } while (validTest == true);
+
+                                break;
+                            }
 
                         //Exit the currency converter
                         case "x":
