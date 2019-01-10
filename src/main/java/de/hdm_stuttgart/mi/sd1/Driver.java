@@ -154,6 +154,7 @@ public class Driver {
                                                             toSell1 = "Selling " + amountToSell + " of ";
                                                         }
 
+
                                                         wrongInput = false;
                                                     } catch (IndexOutOfBoundsException b) {
                                                         System.err.println("Your index was too high!");
@@ -169,7 +170,6 @@ public class Driver {
                                                 }
 
                                             } while (validTest == true);
-
                                         } while (wrongInput == true);
                                     }
 
@@ -182,7 +182,7 @@ public class Driver {
                             break;
 
                         //Select an amount which shall be converted
-                        case "2":      //Todo: Try-Catch anstatt regex
+                        case "2":
                             Boolean validTest = true;
 
                             if (buyCurrency == null) {
@@ -214,6 +214,7 @@ public class Driver {
 
                                         amountToBuy = amount;
                                         amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
+                                        amountToSell= Math.round(amountToSell*100D)/100D;
 
                                         wrongInput = false;
                                         validTest = false;
