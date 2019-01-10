@@ -212,7 +212,7 @@ public class Driver {
                                         double sellVal = splitArray.getCurrencyValue(sellCurrency);
 
 
-                                        amountToBuy = amount;
+                                        amountToBuy = Math.round(amount*100D)/100D;
                                         amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
                                         amountToSell= Math.round(amountToSell*100D)/100D;
 
