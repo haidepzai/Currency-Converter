@@ -16,7 +16,8 @@ public class Calculator {
     public double convertingAmount (double amount, double buySDR, double sellSDR) {
 
         result = (amount/buySDR)*sellSDR;
-        return result;
+
+        return Math.round(result*100D)/100D;
     }
 }
 

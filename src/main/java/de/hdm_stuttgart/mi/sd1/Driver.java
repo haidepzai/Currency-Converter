@@ -214,7 +214,6 @@ public class Driver {
 
                                         amountToBuy = Math.round(amount*100D)/100D;
                                         amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
-                                        amountToSell= Math.round(amountToSell*100D)/100D;
 
                                         wrongInput = false;
                                         validTest = false;
@@ -227,7 +226,7 @@ public class Driver {
 
                                     }
 
-                                } while (validTest == true);
+                                } while (validTest);
 
                                 break;
                             }
