@@ -9,11 +9,18 @@ public class ArraySearch {
 
     static String[] foundArray;
 
+    /**
+     * Search through the read Array for an entered String
+     *
+     * @param enteredName Entered String which shall be searched in the Array
+     * @param currArray Complete Array which was read out the txt-file
+     * @return Array filled with currencies which contain the entered String (except numeric input)
+     */
+
     public static String[] searchEnteredName(String enteredName, String[] currArray) {
 
         nC = 0;
         List<String> foundCurrencies = new ArrayList<>();
-        nC = 0;
 
         for (int i = 0; i < currArray.length; i++) {
             //getCurrencyName: to prevent equalities according number-inputs

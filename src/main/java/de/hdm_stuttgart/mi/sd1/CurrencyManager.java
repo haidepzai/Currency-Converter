@@ -4,6 +4,7 @@ public class CurrencyManager {
 
     /**
      * Check before converting the amount whether both currencies are set
+     *
      * @param buyCurrency Represents currency to buy
      * @param sellCurrency Represents currency to sell
      * @return True, if both currencies set, otherwise false
