@@ -8,7 +8,7 @@ public class SplitArray {
      * @return Return only the name of a currency by cutting the value of the currency after the ":"
      */
 
-    public String getCurrencyName(String currency) {
+    public static String getCurrencyName(String currency) {
         return currency.substring(0, currency.indexOf(":"));
     }
 
@@ -17,7 +17,7 @@ public class SplitArray {
      * @param currency Variable which represents an entire entry
      * @return Return only the SDR value of a currency by cutting the value of the currency after the ":"
      */
-    public double getCurrencyValue(String currency) {
+    public static double getCurrencyValue(String currency) {
         String partValue = currency.substring(currency.indexOf(":") + 1);
         return Double.parseDouble(partValue.trim());
     }

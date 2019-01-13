@@ -3,20 +3,21 @@ package de.hdm_stuttgart.mi.sd1;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: NEU ERSTELLT!
 public class ArraySearch {
 
-    int nC = 0;
+    static int nC;
 
-    TextFileReader tfr = new TextFileReader();
-    String[] foundArray;
+    static String[] foundArray;
 
-    public String[] searchEnteredName(String enteredName, String[] currArray) {
+    public static String[] searchEnteredName(String enteredName, String[] currArray) {
 
+        nC = 0;
         List<String> foundCurrencies = new ArrayList<>();
 
         for (int i = 0; i < currArray.length; i++) {
-            if (currArray[i].toLowerCase().contains(enteredName.toLowerCase())) {
+            //getCurrencyName: to prevent equalities according number-inputs
+            //toLowerCase: to make sure that the case of the input is irrelevant
+            if (SplitArray.getCurrencyName(currArray[i]).toLowerCase().contains(enteredName.toLowerCase())) {
                 foundCurrencies.add(currArray[i]);
                 nC++;
             }

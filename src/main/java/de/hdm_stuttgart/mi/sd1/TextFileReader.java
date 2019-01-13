@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TextFileReader {
 
-    String[] currArray;
+    static String[] currArray;
 
     /**
      * Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
@@ -16,7 +16,7 @@ public class TextFileReader {
      * @return Array with the several currencies of the txt-file
      * @throws IOException
      */
-    public String[] readFile(String filename) throws IOException {
+    public static String[] readFile(String filename) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(filename));
         List<String> currList = new ArrayList<>();
