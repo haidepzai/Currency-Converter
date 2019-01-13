@@ -35,11 +35,11 @@ public class CurrencyManager {
 
     }
 
-    public void setCurrency(String case, String currency) {
-        if (case.equals("0")) {
+    public void setCurrency(String mode, String currency) {
+        if (mode.equals("0")) {
             buyCurrency = currency;
             toBuy2 = SplitArray.getCurrencyName(buyCurrency);
-        } else if (case.equals("1")) {
+        } else if (mode.equals("1")) {
             sellCurrency = currency;
             toSell2 = SplitArray.getCurrencyName(sellCurrency);
         }
