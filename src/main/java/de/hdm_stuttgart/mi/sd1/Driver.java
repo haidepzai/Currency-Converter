@@ -1,9 +1,7 @@
 package de.hdm_stuttgart.mi.sd1;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -169,13 +167,13 @@ public class Driver {
                                                     menuInput.next();
                                                 }
 
-                                            } while (validTest == true);
-                                        } while (wrongInput == true);
+                                            } while (validTest);
+                                        } while (wrongInput);
                                     }
 
                                 }
 
-                            } while (wrongInput == true);
+                            } while (wrongInput);
 
 
                             wrongInput = false;
@@ -184,19 +182,10 @@ public class Driver {
                         //Select an amount which shall be converted
                         case "2":
                             Boolean validTest = true;
-
-                            if (buyCurrency == null) {
-                                System.out.println("\nYou have to select a currency to buy first!\n");
+                            CurrencyManager currencyManager = new CurrencyManager();
+                            if(currencyManager.checkCurrencies(buyCurrency,sellCurrency))
                                 break;
-                            } else if (sellCurrency == null) {
-
-                                System.out.println("\nYou have to select a currency to sell first!\n");
-                                break;
-                            } else if (buyCurrency == null && sellCurrency == null) {
-
-                                System.out.println("\nYou have to select a currency to buy and to sell first!\n");
-                                break;
-                            } else {
+                            else {
                                 do {
                                     try {
                                         System.out.print("Enter an amount: ");
@@ -212,7 +201,7 @@ public class Driver {
                                         double sellVal = splitArray.getCurrencyValue(sellCurrency);
 
 
-                                        amountToBuy = Math.round(amount*100D)/100D;
+                                        amountToBuy = Math.round(amount * 100D) / 100D;
                                         amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
 
                                         wrongInput = false;
