@@ -19,6 +19,13 @@ public class Calculator {
         return Math.round(result*100D)/100D;
     }
 
+    /**
+     * Round the entered amount to buy
+     *
+     * @param amount Entered amount to buy
+     * @return Rounded amount to buy
+     */
+
     static double setAmountToBuy (double amount) {
 
         return Math.round(amount * 100D) / 100D;

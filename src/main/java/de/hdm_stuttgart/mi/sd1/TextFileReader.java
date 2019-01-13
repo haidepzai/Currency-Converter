@@ -12,6 +12,7 @@ public class TextFileReader {
 
     /**
      * Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
+     *
      * @param filename File, which shall be read
      * @return Array with the several currencies of the txt-file
      * @throws IOException
