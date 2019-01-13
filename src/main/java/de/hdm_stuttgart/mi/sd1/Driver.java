@@ -28,7 +28,6 @@ public class Driver {
 
         /**
          * Creates a menu
-         *
          */
 
         TextFileReader tfr = new TextFileReader();
@@ -43,7 +42,6 @@ public class Driver {
 
             /**
              * do-while loop for the menu selection
-             *
              */
             while (true) {
 
@@ -106,11 +104,6 @@ public class Driver {
 
                                         System.out.println("\n");
 
-                                        if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
-                                            toBuy1 = "Buying " + amountToBuy + " of ";
-                                            toSell1 = "Selling " + amountToSell + " of ";
-                                        }
-
                                         wrongInput = false;
 
                                         //If more than one currency is found
@@ -147,12 +140,6 @@ public class Driver {
 
                                                         System.out.println("\n");
 
-                                                        if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
-                                                            toBuy1 = "Buying " + amountToBuy + " of ";
-                                                            toSell1 = "Selling " + amountToSell + " of ";
-                                                        }
-
-
                                                         wrongInput = false;
                                                     } catch (IndexOutOfBoundsException b) {
                                                         System.err.println("Your index was too high!");
@@ -170,11 +157,9 @@ public class Driver {
                                             } while (validTest);
                                         } while (wrongInput);
                                     }
-
                                 }
 
                             } while (wrongInput);
-
 
                             wrongInput = false;
                             break;
@@ -183,7 +168,7 @@ public class Driver {
                         case "2":
                             Boolean validTest = true;
                             CurrencyManager currencyManager = new CurrencyManager();
-                            if(currencyManager.checkCurrencies(buyCurrency,sellCurrency))
+                            if (currencyManager.checkCurrencies(buyCurrency, sellCurrency))
                                 break;
                             else {
                                 do {
@@ -196,17 +181,14 @@ public class Driver {
 
                                         Calculator calc = new Calculator();
 
-
                                         double buyVal = splitArray.getCurrencyValue(buyCurrency);
                                         double sellVal = splitArray.getCurrencyValue(sellCurrency);
-
 
                                         amountToBuy = Math.round(amount * 100D) / 100D;
                                         amountToSell = calc.convertingAmount(amount, buyVal, sellVal);
 
                                         wrongInput = false;
                                         validTest = false;
-
 
                                     } catch (InputMismatchException i) {
                                         System.out.println("Not a valid amount");
@@ -241,5 +223,3 @@ public class Driver {
         }
     }
 }
-
-

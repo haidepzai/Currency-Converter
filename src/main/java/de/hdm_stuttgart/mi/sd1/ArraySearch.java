@@ -14,6 +14,7 @@ public class ArraySearch {
     public String[] searchEnteredName(String enteredName, String[] currArray) {
 
         List<String> foundCurrencies = new ArrayList<>();
+        nC = 0;
 
         for (int i = 0; i < currArray.length; i++) {
             if (currArray[i].toLowerCase().contains(enteredName.toLowerCase())) {
