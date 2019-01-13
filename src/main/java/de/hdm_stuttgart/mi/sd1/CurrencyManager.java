@@ -35,6 +35,12 @@ public class CurrencyManager {
 
     }
 
+    /**
+     * Set the currency according to the given case
+     * @param mode input Value
+     * @param currency Name and the amount of the currency
+     */
+
     public void setCurrency(String mode, String currency) {
         if (mode.equals("0")) {
             buyCurrency = currency;
