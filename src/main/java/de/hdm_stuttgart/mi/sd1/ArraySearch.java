@@ -13,6 +13,7 @@ public class ArraySearch {
 
         nC = 0;
         List<String> foundCurrencies = new ArrayList<>();
+        nC = 0;
 
         for (int i = 0; i < currArray.length; i++) {
             //getCurrencyName: to prevent equalities according number-inputs

@@ -28,17 +28,13 @@ public class Driver {
 
         /**
          * Creates a menu
-         *
          */
-
-        //boolean wrongInput = false;
 
         try (Scanner menuInput = new Scanner(System.in)) {
 
 
             /**
              * do-while loop for the menu selection
-             *
              */
             while (true) {
 
@@ -151,29 +147,19 @@ public class Driver {
 
                         break;
 
-                    //Select an amount which shall be converted
-                    case "2":
-                        if (buyCurrency == null && sellCurrency != null) {
-                            System.out.println("\nYou have to select a currency to buy first!\n");
-                            break;
-                        } else if (sellCurrency == null && buyCurrency != null) {
+                        //Select an amount which shall be converted
+                        case "2":
+                            CurrencyManager currencyManager = new CurrencyManager();
+                            if (currencyManager.checkCurrencies(buyCurrency, sellCurrency))
+                                break;
+                            else {
+                                while (true) {
+                                    try {
+                                        System.out.print("Enter an amount: ");
 
-                            System.out.println("\nYou have to select a currency to sell first!\n");
-                            break;
-                        } else if (buyCurrency == null && sellCurrency == null) {
+                                        double amount = menuInput.nextDouble();
 
-                            System.out.println("\nYou have to select a currency to buy and to sell first!\n");
-                            break;
-                        } else {
-
-                            while(true) {
-
-                                try {
-                                    System.out.print("Enter an amount: ");
-
-                                    double amount = menuInput.nextDouble();
-
-                                    System.out.println("\n");
+                                        System.out.println("\n");
 
                                     double buyVal = SplitArray.getCurrencyValue(buyCurrency);
                                     double sellVal = SplitArray.getCurrencyValue(sellCurrency);
@@ -208,5 +194,3 @@ public class Driver {
         }
     }
 }
-
-
