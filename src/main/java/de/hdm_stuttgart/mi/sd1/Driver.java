@@ -6,16 +6,8 @@ import java.util.Scanner;
 
 
 public class Driver {
-
-    static String toBuy1 = " Currency to buy: ";
-    static String toSell1 = "Currency to sell: ";
-    static String toBuy2 = "not set";
-    static String toSell2 = "not set";
     static double amountToBuy = 0;
     static double amountToSell = 0;
-
-    static String buyCurrency;
-    static String sellCurrency;
 
     static String[] foundArray;
 
@@ -30,6 +22,8 @@ public class Driver {
          * Creates a menu
          */
 
+        CurrencyManager currencyManager = new CurrencyManager();
+
         try (Scanner menuInput = new Scanner(System.in)) {
 
 
@@ -38,13 +32,13 @@ public class Driver {
              */
             while (true) {
 
-                if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
-                    toBuy1 = "Buying " + amountToBuy + " of ";
-                    toSell1 = "Selling " + amountToSell + " of ";
+                if (!CurrencyManager.toBuy2.equals("not set") && !CurrencyManager.toSell2.equals("not set")) {
+                    CurrencyManager.toBuy1 = "Buying " + amountToBuy + " of ";
+                    CurrencyManager.toSell1 = "Selling " + amountToSell + " of ";
                 }
 
-                System.out.println("\n" + toBuy1 + toBuy2);
-                System.out.println(toSell1 + toSell2);
+                System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
+                System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
                 System.out.println("+++++++++++++++++++++++++");
                 System.out.println("0: Select currency to buy");
                 System.out.println("1: Select currency to sell");
@@ -84,24 +78,13 @@ public class Driver {
 
                                     //If just one currency found
                                 } else if (ArraySearch.nC == 1) {
-
-                                    //Currency to buy selected ("0")=> found currency added as currency to buy
-                                    if (inputValue.equals("0")) {
-                                        buyCurrency = foundArray[0];
-                                        toBuy2 = SplitArray.getCurrencyName(buyCurrency);
-
-                                        //Currency to sell selected ("1") => found currency added as currency to sell
-                                    } else if (inputValue.equals("1")) {
-                                        sellCurrency = foundArray[0];
-                                        toSell2 = SplitArray.getCurrencyName(sellCurrency);
-                                    }
-
+                                    currencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
                                     //If more than one currency is found
                                 } else if (ArraySearch.nC >= 2) {
-                                    System.out.println("\n" + toBuy1 + toBuy2);
-                                    System.out.println(toSell1 + toSell2);
+                                    System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
+                                    System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
                                     System.out.println("+++++++++++++++++++++++++");
 
                                     //Print out the Array of found currencies
@@ -116,17 +99,8 @@ public class Driver {
                                         System.out.print("Select a currency by index: ");
 
                                         try {
-
                                             int selectCurrency = menuInput.nextInt();
-
-                                            //Overwrite "Currency to buy/sell" with the selected currency
-                                            if (inputValue.equals("0")) {
-                                                buyCurrency = foundArray[selectCurrency];
-                                                toBuy2 = SplitArray.getCurrencyName(buyCurrency);
-                                            } else if (inputValue.equals("1")) {
-                                                sellCurrency = foundArray[selectCurrency];
-                                                toSell2 = SplitArray.getCurrencyName(sellCurrency);
-                                            }
+                                            currencyManager.setCurrency(inputValue, foundArray[selectCurrency]);
 
                                             System.out.println("\n");
                                             break;
@@ -147,25 +121,26 @@ public class Driver {
 
                         break;
 
-                        //Select an amount which shall be converted
-                        case "2":
-                            CurrencyManager currencyManager = new CurrencyManager();
-                            if (currencyManager.checkCurrencies(buyCurrency, sellCurrency))
-                                break;
-                            else {
-                                while (true) {
-                                    try {
-                                        System.out.print("Enter an amount: ");
+                    //Select an amount which shall be converted
+                    case "2":
 
-                                        double amount = menuInput.nextDouble();
+                        if (currencyManager.checkCurrencies(CurrencyManager.buyCurrency, CurrencyManager.sellCurrency))
+                            break;
+                        else {
+                            while (true) {
+                                try {
+                                    System.out.print("Enter an amount: ");
 
-                                        System.out.println("\n");
+                                    double amount = menuInput.nextDouble();
 
-                                    double buyVal = SplitArray.getCurrencyValue(buyCurrency);
-                                    double sellVal = SplitArray.getCurrencyValue(sellCurrency);
+                                    System.out.println("\n");
+
+                                    double buyVal = SplitArray.getCurrencyValue(CurrencyManager.buyCurrency);
+                                    double sellVal = SplitArray.getCurrencyValue(CurrencyManager.sellCurrency);
 
                                     amountToBuy = Calculator.setAmountToBuy(amount);
-;                                   amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
+                                    ;
+                                    amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
 
                                     break;
 

@@ -2,6 +2,13 @@ package de.hdm_stuttgart.mi.sd1;
 
 public class CurrencyManager {
 
+    static String toBuy1 = " Currency to buy: ";
+    static String toSell1 = "Currency to sell: ";
+    static String toBuy2 = "not set";
+    static String toSell2 = "not set";
+    static String buyCurrency;
+    static String sellCurrency;
+
     /**
      * Check before converting the amount whether both currencies are set
      * @param buyCurrency Represents currency to buy
@@ -25,6 +32,16 @@ public class CurrencyManager {
         }
         return false;
 
+    }
+
+    public void setCurrency(String case, String currency) {
+        if (case.equals("0")) {
+            buyCurrency = currency;
+            toBuy2 = SplitArray.getCurrencyName(buyCurrency);
+        } else if (case.equals("1")) {
+            sellCurrency = currency;
+            toSell2 = SplitArray.getCurrencyName(sellCurrency);
+        }
     }
 
 }
