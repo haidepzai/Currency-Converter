@@ -118,20 +118,27 @@ public class Driver {
 
                                     double amount = menuInput.nextDouble();
 
-                                    System.out.println("\n");
+                                    if (amount >= 0) {
 
-                                    //Flexible/Changeable user-menu
-                                    double buyVal = SplitArray.getCurrencyValue(CurrencyManager.buyCurrency);
-                                    double sellVal = SplitArray.getCurrencyValue(CurrencyManager.sellCurrency);
+                                        System.out.println("\n");
 
-                                    //Set amount to sell/buy for the representation in the menu
-                                    CurrencyManager.amountToBuy = Calculator.setAmountToBuy(amount);
-                                    CurrencyManager.amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
+                                        //Flexible/Changeable user-menu
+                                        double buyVal = SplitArray.getCurrencyValue(CurrencyManager.buyCurrency);
+                                        double sellVal = SplitArray.getCurrencyValue(CurrencyManager.sellCurrency);
 
-                                    break;
+                                        //Set amount to sell/buy for the representation in the menu
+                                        CurrencyManager.amountToBuy = Calculator.setAmountToBuy(amount);
+                                        CurrencyManager.amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
+
+                                        break;
+
+                                    } else {
+                                        System.out.println("Not a valid amount! Try again");
+                                    }
+
 
                                 } catch (InputMismatchException i) {
-                                    System.out.println("Not a valid amount! Try again!");
+                                    System.err.println("Not a valid amount! Try again!");
                                     menuInput.next();
                                 }
                             }
