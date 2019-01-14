@@ -54,19 +54,19 @@ public class Driver {
                                 String[] currArray = TextFileReader.readFile("Currencies.txt");
 
                                 //Search through the Array for the entered String from the user
-                                foundArray = ArraySearch.searchEnteredName(enteredName, currArray);
+                                foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
 
                                 //If no currency found
-                                if (ArraySearch.nC == 0) {
+                                if (ArrayManager.nC == 0) {
                                     System.err.println("No suitable currencies found! Try again!");
 
                                 //If just one currency found => found currencies directly added to menu output
-                                } else if (ArraySearch.nC == 1) {
+                                } else if (ArrayManager.nC == 1) {
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
                                 //If more than one currency is found
-                                } else if (ArraySearch.nC >= 2) {
+                                } else if (ArrayManager.nC >= 2) {
                                     System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                                     System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
                                     System.out.println("+++++++++++++++++++++++++");
@@ -74,7 +74,7 @@ public class Driver {
                                     //Print out the Array of found currencies
                                     int t = 0;
                                     for (String fA : foundArray) {
-                                        System.out.println(t + ": " + SplitArray.getCurrencyName(fA));
+                                        System.out.println(t + ": " + ArrayManager.getCurrencyName(fA));
                                         t++;
                                     }
 
@@ -123,8 +123,8 @@ public class Driver {
                                         System.out.println("\n");
 
                                         //Flexible/Changeable user-menu
-                                        double buyVal = SplitArray.getCurrencyValue(CurrencyManager.buyCurrency);
-                                        double sellVal = SplitArray.getCurrencyValue(CurrencyManager.sellCurrency);
+                                        double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
+                                        double sellVal = ArrayManager.getCurrencyValue(CurrencyManager.sellCurrency);
 
                                         //Set amount to sell/buy for the representation in the menu
                                         CurrencyManager.amountToBuy = Calculator.setAmountToBuy(amount);

@@ -12,5 +12,5 @@ public class TestCurrencyConverter {
         assertEquals(-23.45, Calculator.setAmountToBuy(-23.4451), 0.001);
 
     }
-    
+
 }

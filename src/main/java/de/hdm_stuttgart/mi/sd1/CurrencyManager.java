@@ -48,15 +48,15 @@ public class CurrencyManager {
     public static void setCurrency(String mode, String currency) {
         if (mode.equals("0")) {
             buyCurrency = currency;
-            toBuy2 = SplitArray.getCurrencyName(buyCurrency);
+            toBuy2 = ArrayManager.getCurrencyName(buyCurrency);
 
             if(amountToBuy == 0) {
 
             } else {
-                double value = SplitArray.getCurrencyValue(buyCurrency);
+                double value = ArrayManager.getCurrencyValue(buyCurrency);
 
                 double buyVal = value;
-                double sellVal = SplitArray.getCurrencyValue(sellCurrency);
+                double sellVal = ArrayManager.getCurrencyValue(sellCurrency);
 
                 double result = (amountToBuy / buyVal) * sellVal;
                 amountToSell = Math.round(result * 100D) / 100D;
@@ -64,16 +64,16 @@ public class CurrencyManager {
 
         } else if (mode.equals("1")) {
             sellCurrency = currency;
-            toSell2 = SplitArray.getCurrencyName(sellCurrency);
+            toSell2 = ArrayManager.getCurrencyName(sellCurrency);
 
             if(amountToSell == 0) {
 
             } else {
 
-                double value = SplitArray.getCurrencyValue(buyCurrency);
+                double value = ArrayManager.getCurrencyValue(buyCurrency);
 
                 double sellVal = value;
-                double buyVal = SplitArray.getCurrencyValue(sellCurrency);
+                double buyVal = ArrayManager.getCurrencyValue(sellCurrency);
 
                 double result = (amountToBuy *buyVal)/ sellVal;
                 amountToSell =  Math.round(result*100D)/100D;
