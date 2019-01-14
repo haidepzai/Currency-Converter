@@ -22,6 +22,7 @@ public class Driver {
                     CurrencyManager.toBuy1 = "Buying " + CurrencyManager.amountToBuy + " of ";
                     CurrencyManager.toSell1 = "Selling " + CurrencyManager.amountToSell + " of ";
                 }
+                
                 //Flexible/Changeable user-menu
                 System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                 System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
@@ -108,7 +109,6 @@ public class Driver {
 
                     //Select an amount which shall be converted
                     case "2":
-
                         if (CurrencyManager.checkCurrencies(CurrencyManager.buyCurrency, CurrencyManager.sellCurrency))
                             break;
                         else {
@@ -118,6 +118,7 @@ public class Driver {
 
                                     double amount = menuInput.nextDouble();
 
+                                    //Negative input not allowed
                                     if (amount >= 0) {
 
                                         System.out.println("\n");
@@ -146,7 +147,7 @@ public class Driver {
                             break;
                         }
 
-                        //Exit the currency converter
+                    //Exit the currency converter
                     case "x":
                         System.out.println("You have terminated the currency converter!");
                         System.exit(0);

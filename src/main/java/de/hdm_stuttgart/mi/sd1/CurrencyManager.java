@@ -41,7 +41,7 @@ public class CurrencyManager {
 
     /**
      * Set the currency according to the given case
-     * @param mode input Value
+     * @param mode input Value => buy or sell currency
      * @param currency Name and the amount of the currency
      */
 

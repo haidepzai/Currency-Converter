@@ -10,6 +10,7 @@ public class ArrayManager {
 
     /**
      * Get only the first part of an Array's entry, the name of a currency
+     *
      * @param currency Variable which represents an entire entry
      * @return Return only the name of a currency by cutting the value of the currency after the ":"
      */
@@ -20,6 +21,7 @@ public class ArrayManager {
 
     /**
      * Get only the second part of an Array's entry, the value of a currency
+     *
      * @param currency Variable which represents an entire entry
      * @return Return only the SDR value of a currency by cutting the value of the currency after the ":"
      */
