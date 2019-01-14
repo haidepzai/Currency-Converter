@@ -9,6 +9,9 @@ public class CurrencyManager {
     static String buyCurrency;
     static String sellCurrency;
 
+    static double amountToBuy = 0;
+    static double amountToSell = 0;
+
     /**
      * Check before converting the amount whether both currencies are set
      *
@@ -17,7 +20,7 @@ public class CurrencyManager {
      * @return True, if both currencies set, otherwise false
      */
 
-    public boolean checkCurrencies(String buyCurrency, String sellCurrency) {
+    public static boolean checkCurrencies(String buyCurrency, String sellCurrency) {
 
 
         if (buyCurrency == null && sellCurrency == null) {
@@ -41,13 +44,40 @@ public class CurrencyManager {
      * @param currency Name and the amount of the currency
      */
 
-    public void setCurrency(String mode, String currency) {
+    public static void setCurrency(String mode, String currency) {
         if (mode.equals("0")) {
             buyCurrency = currency;
             toBuy2 = SplitArray.getCurrencyName(buyCurrency);
+
+            if(amountToBuy == 0) {
+
+            } else {
+                double value = SplitArray.getCurrencyValue(buyCurrency);
+
+                double buyVal = value;
+                double sellVal = SplitArray.getCurrencyValue(sellCurrency);
+
+                double result = (amountToBuy / buyVal) * sellVal;
+                amountToSell = Math.round(result * 100D) / 100D;
+            }
+
         } else if (mode.equals("1")) {
             sellCurrency = currency;
             toSell2 = SplitArray.getCurrencyName(sellCurrency);
+
+            if(amountToSell == 0) {
+
+            } else {
+
+                double value = SplitArray.getCurrencyValue(buyCurrency);
+
+                double sellVal = value;
+                double buyVal = SplitArray.getCurrencyValue(sellCurrency);
+
+                double result = (amountToBuy *buyVal)/ sellVal;
+                amountToSell =  Math.round(result*100D)/100D;
+            }
+
         }
     }
 
