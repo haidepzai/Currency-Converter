@@ -13,4 +13,13 @@ public class TestCurrencyConverter {
 
     }
 
+    @Test
+    public void testCheckCurrencies(){
+        assertTrue(CurrencyManager.checkCurrencies(CurrencyManager.buyCurrency,CurrencyManager.sellCurrency));
+        assertTrue(CurrencyManager.checkCurrencies(null,null));
+        assertTrue(CurrencyManager.checkCurrencies("Euro",CurrencyManager.sellCurrency));
+        assertTrue(CurrencyManager.checkCurrencies(CurrencyManager.buyCurrency,"Euro"));
+
+    }
+
 }
