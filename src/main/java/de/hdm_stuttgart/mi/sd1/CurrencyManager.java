@@ -50,12 +50,10 @@ public class CurrencyManager {
             buyCurrency = currency;
             toBuy2 = ArrayManager.getCurrencyName(buyCurrency);
 
-            if(amountToBuy == 0) {
+            //TODO: Why == 0 empty? why redundant variables
+            if(amountToBuy != 0) {
 
-            } else {
-                double value = ArrayManager.getCurrencyValue(buyCurrency);
-
-                double buyVal = value;
+                double buyVal = ArrayManager.getCurrencyValue(buyCurrency);;
                 double sellVal = ArrayManager.getCurrencyValue(sellCurrency);
 
                 double result = (amountToBuy / buyVal) * sellVal;
@@ -66,16 +64,12 @@ public class CurrencyManager {
             sellCurrency = currency;
             toSell2 = ArrayManager.getCurrencyName(sellCurrency);
 
-            if(amountToSell == 0) {
+            if(amountToSell != 0) {
 
-            } else {
-
-                double value = ArrayManager.getCurrencyValue(buyCurrency);
-
-                double sellVal = value;
+                double sellVal = ArrayManager.getCurrencyValue(buyCurrency);;
                 double buyVal = ArrayManager.getCurrencyValue(sellCurrency);
 
-                double result = (amountToBuy *buyVal)/ sellVal;
+                double result = (amountToBuy * buyVal)/ sellVal;
                 amountToSell =  Math.round(result*100D)/100D;
             }
 

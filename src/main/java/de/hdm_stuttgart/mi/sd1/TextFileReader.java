@@ -13,13 +13,13 @@ public class TextFileReader {
     /**
      * Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
      *
-     * @param filename File, which shall be read
      * @return Array with the several currencies of the txt-file
      * @throws IOException
      */
-    public static String[] readFile(String filename) throws IOException {
+    public static String[] readFile() throws IOException {
 
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+        BufferedReader br = new BufferedReader(new FileReader("Currencies.txt"));
+
         List<String> currList = new ArrayList<>();
         String lineItems;
 
@@ -28,7 +28,7 @@ public class TextFileReader {
         }
 
         br.close();
+
         return currArray = currList.toArray(new String[0]);
     }
-
 }

@@ -22,7 +22,7 @@ public class Driver {
                     CurrencyManager.toBuy1 = "Buying " + CurrencyManager.amountToBuy + " of ";
                     CurrencyManager.toSell1 = "Selling " + CurrencyManager.amountToSell + " of ";
                 }
-                
+
                 //Flexible/Changeable user-menu
                 System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                 System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
@@ -52,21 +52,22 @@ public class Driver {
 
                             } else {
                                 //Read file and return content as Array
-                                String[] currArray = TextFileReader.readFile("Currencies.txt");
+                                String[] currArray = TextFileReader.readFile();
 
                                 //Search through the Array for the entered String from the user
                                 foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
 
-                                //If no currency found
+                                //Depending on how much currencies found => different further actions
+                                // 1) If no currency found
                                 if (ArrayManager.nC == 0) {
-                                    System.err.println("No suitable currencies found! Try again!");
+                                    System.out.println("No suitable currencies found! Try again!\n");
 
-                                //If just one currency found => found currencies directly added to menu output
+                                    // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
-                                //If more than one currency is found
+                                    // 3) If more than one currency is found
                                 } else if (ArrayManager.nC >= 2) {
                                     System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                                     System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
@@ -118,25 +119,17 @@ public class Driver {
 
                                     double amount = menuInput.nextDouble();
 
-                                    //Negative input not allowed
-                                    if (amount >= 0) {
+                                    System.out.println("\n");
 
-                                        System.out.println("\n");
+                                    //Flexible/Changeable user-menu
+                                    double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
+                                    double sellVal = ArrayManager.getCurrencyValue(CurrencyManager.sellCurrency);
 
-                                        //Flexible/Changeable user-menu
-                                        double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
-                                        double sellVal = ArrayManager.getCurrencyValue(CurrencyManager.sellCurrency);
+                                    //Set amount to sell/buy for the representation in the menu
+                                    CurrencyManager.amountToBuy = Calculator.setAmountToBuy(amount);
+                                    CurrencyManager.amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
 
-                                        //Set amount to sell/buy for the representation in the menu
-                                        CurrencyManager.amountToBuy = Calculator.setAmountToBuy(amount);
-                                        CurrencyManager.amountToSell = Calculator.convertingAmount(amount, buyVal, sellVal);
-
-                                        break;
-
-                                    } else {
-                                        System.out.println("Not a valid amount! Try again");
-                                    }
-
+                                    break;
 
                                 } catch (InputMismatchException i) {
                                     System.err.println("Not a valid amount! Try again!");
@@ -147,13 +140,13 @@ public class Driver {
                             break;
                         }
 
-                    //Exit the currency converter
+                        //Exit the currency converter
                     case "x":
                         System.out.println("You have terminated the currency converter!");
                         System.exit(0);
 
                     default:
-                        System.err.println("Not a valid option! Try again!");
+                        System.out.println("Not a valid option! Try again!");
                         break;
                 }
             }
