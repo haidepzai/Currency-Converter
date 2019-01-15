@@ -8,18 +8,11 @@ import java.io.IOException;
 
 public class TestCurrencyConverter {
 
+    //Calculator-class tests:
     @Test
     public void testSetAmountToBuy() {
         assertEquals(23.45, Calculator.setAmountToBuy(23.446756), 0.001);
         assertEquals(-23.45, Calculator.setAmountToBuy(-23.4451), 0.001);
-
-    }
-
-    @Test
-    public void testCheckCurrencies(){
-        assertTrue(CurrencyManager.checkCurrencies(null,null));
-        assertTrue(CurrencyManager.checkCurrencies("Euro",null));
-        assertTrue(CurrencyManager.checkCurrencies(null,"Euro"));
 
     }
 
@@ -32,6 +25,18 @@ public class TestCurrencyConverter {
         //1000 Japanese Yen in Korean Won
         assertEquals(10058.69,Calculator.convertingAmount(1000,155.906,1568.21),0.001);
     }
+
+
+    //CurrencyManager-class tests:
+    @Test
+    public void testCheckCurrencies(){
+        assertTrue(CurrencyManager.checkCurrencies(null,null));
+        assertTrue(CurrencyManager.checkCurrencies("Euro:   1.2181",null));
+        assertTrue(CurrencyManager.checkCurrencies(null,"Euro:   1.2181"));
+        assertFalse(CurrencyManager.checkCurrencies("Euro:   1.2181", "Australian Dollar:   1.92771"));
+
+    }
+
 
     @Test
     public void testGetCurrencyName() {
@@ -47,9 +52,10 @@ public class TestCurrencyConverter {
         assertEquals(249.237, ArrayManager.getCurrencyValue("Sri Lankan Rupee:   249.237"), 0.001);
     }
 
-    //TODO: Is this useful? Is this correct?
-    //@Test(expected = IOException.class)
-    //public void testIOException() throws IOException {
-    //    TextFileReader.readFile("Currencie.txt");
-    //}
+    @Test(expected = IOException.class)
+    public void testIOException() throws IOException {
+        TextFileReader.readFile("Currencis.txt");
+    }
+
+
 }

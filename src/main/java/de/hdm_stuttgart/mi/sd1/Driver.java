@@ -52,7 +52,7 @@ public class Driver {
 
                             } else {
                                 //Read file and return content as Array
-                                String[] currArray = TextFileReader.readFile();
+                                String[] currArray = TextFileReader.readFile("Currencies.txt");
 
                                 //Search through the Array for the entered String from the user
                                 foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
@@ -62,12 +62,12 @@ public class Driver {
                                 if (ArrayManager.nC == 0) {
                                     System.out.println("No suitable currencies found! Try again!\n");
 
-                                    // 2) If just one currency found => found currencies directly added to menu output
+                                // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
-                                    // 3) If more than one currency is found
+                                // 3) If more than one currency is found
                                 } else if (ArrayManager.nC >= 2) {
                                     System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                                     System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);

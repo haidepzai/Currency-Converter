@@ -41,16 +41,16 @@ public class CurrencyManager {
 
     /**
      * Set the currency according to the given case
+     *
      * @param mode input Value => buy or sell currency
-     * @param currency Name and the amount of the currency
+     * @param currencyToSet Name and the amount of the currency
      */
 
-    public static void setCurrency(String mode, String currency) {
+    public static void setCurrency(String mode, String currencyToSet) {
         if (mode.equals("0")) {
-            buyCurrency = currency;
+            buyCurrency = currencyToSet;
             toBuy2 = ArrayManager.getCurrencyName(buyCurrency);
 
-            //TODO: Why == 0 empty? why redundant variables
             if(amountToBuy != 0) {
 
                 double buyVal = ArrayManager.getCurrencyValue(buyCurrency);;
@@ -61,7 +61,7 @@ public class CurrencyManager {
             }
 
         } else if (mode.equals("1")) {
-            sellCurrency = currency;
+            sellCurrency = currencyToSet;
             toSell2 = ArrayManager.getCurrencyName(sellCurrency);
 
             if(amountToSell != 0) {

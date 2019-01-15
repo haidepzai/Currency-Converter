@@ -25,6 +25,7 @@ public class ArrayManager {
      * @param currency Variable which represents an entire entry
      * @return Return only the SDR value of a currency by cutting the value of the currency after the ":"
      */
+
     public static double getCurrencyValue(String currency) {
         String partValue = currency.substring(currency.indexOf(":") + 1);
         return Double.parseDouble(partValue.trim());
@@ -52,6 +53,7 @@ public class ArrayManager {
                 nC++;
             }
         }
+
         return foundArray = foundCurrencies.toArray(new String[0]);
     }
 }
