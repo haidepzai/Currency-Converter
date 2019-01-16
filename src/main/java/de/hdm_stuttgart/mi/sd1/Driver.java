@@ -13,7 +13,7 @@ public class Driver {
     public static void main(String[] args) {
 
         try (Scanner menuInput = new Scanner(System.in)) {
-
+            ScreenCleaner.clearScreen();
             //Endless loop to allow unlimited changes until break/exit
             while (true) {
 
@@ -24,7 +24,7 @@ public class Driver {
                 }
 
                 //Flexible/Changeable user-menu
-                System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
+                System.out.println(CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                 System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
                 System.out.println("+++++++++++++++++++++++++");
                 System.out.println("0: Select currency to buy");
@@ -44,6 +44,7 @@ public class Driver {
                         while (true) {
                             System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
                             String enteredName = menuInput.next();
+                            ScreenCleaner.clearScreen();
 
                             //Leave currency converter
                             if (enteredName.equals("xxx")) {
@@ -101,12 +102,12 @@ public class Driver {
                                     }
 
                                     break;
-                                }
+                                }ScreenCleaner.clearScreen();
 
                             }
                         }
-
                         break;
+
 
                     //Select an amount which shall be converted
                     case "2":
@@ -118,8 +119,10 @@ public class Driver {
                                     System.out.print("Enter an amount: ");
 
                                     double amount = menuInput.nextDouble();
-
                                     System.out.println("\n");
+                                    ScreenCleaner.clearScreen();
+
+
 
                                     //Flexible/Changeable user-menu
                                     double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
