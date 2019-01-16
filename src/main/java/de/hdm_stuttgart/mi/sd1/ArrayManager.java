@@ -36,7 +36,7 @@ public class ArrayManager {
      * Search through the read Array for an entered String
      *
      * @param enteredName Entered String which shall be searched in the Array
-     * @param currArray Complete Array which was read out the txt-file
+     * @param currArray   Complete Array which was read out the txt-file
      * @return Array filled with currencies which contain the entered String (except numeric input)
      */
 
