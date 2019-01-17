@@ -8,8 +8,6 @@ import java.util.List;
 
 public class TextFileReader {
 
-    static String[] currArray;
-
     /**
      * Reads a given file and puts the contained lines into a flexible ArrayList and finally into an Array
      *
@@ -31,6 +29,6 @@ public class TextFileReader {
 
         br.close();
 
-        return currArray = currList.toArray(new String[0]);
+        return currList.toArray(new String[0]);
     }
 }

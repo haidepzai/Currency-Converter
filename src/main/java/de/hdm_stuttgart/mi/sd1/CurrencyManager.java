@@ -44,12 +44,12 @@ public class CurrencyManager {
     /**
      * Set the currency according to the given case
      *
-     * @param mode input Value => buy or sell currency
+     * @param optionMode input Value => buy or sell currency
      * @param currencyToSet Name and the amount of the currency
      */
 
-    public static void setCurrency(String mode, String currencyToSet) {
-        if (mode.equals("0")) {
+    public static void setCurrency(String optionMode, String currencyToSet) {
+        if (optionMode.equals("0")) {
             buyCurrency = currencyToSet;
             toBuy2 = ArrayManager.getCurrencyName(buyCurrency);
 
@@ -62,16 +62,16 @@ public class CurrencyManager {
                 amountToSell = Math.round(result * 100D) / 100D;
             }
 
-        } else if (mode.equals("1")) {
+        } else if (optionMode.equals("1")) {
             sellCurrency = currencyToSet;
             toSell2 = ArrayManager.getCurrencyName(sellCurrency);
 
             if(amountToSell != 0) {
 
-                double sellVal = ArrayManager.getCurrencyValue(buyCurrency);;
-                double buyVal = ArrayManager.getCurrencyValue(sellCurrency);
+                double sellValue = ArrayManager.getCurrencyValue(buyCurrency);;
+                double buyValue = ArrayManager.getCurrencyValue(sellCurrency);
 
-                double result = (amountToBuy * buyVal)/ sellVal;
+                double result = (amountToBuy * buyValue)/ sellValue;
                 amountToSell =  Math.round(result*100D)/100D;
             }
 

@@ -6,7 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 public class TestCalculator {
 
-    //Calculator-class tests:
+    /**
+     * Calculator-class tests:
+     */
 
     @Test
     public void testSetAmountToBuy() {
@@ -24,6 +26,4 @@ public class TestCalculator {
         //1000 Japanese Yen in Korean Won
         assertEquals(10058.69, Calculator.convertingAmount(1000, 155.906, 1568.21), 0.00001);
     }
-
-
 }

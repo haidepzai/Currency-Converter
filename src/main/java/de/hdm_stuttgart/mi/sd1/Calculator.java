@@ -2,8 +2,6 @@ package de.hdm_stuttgart.mi.sd1;
 
 public class Calculator {
 
-    static double result;
-
     /**
      * Algorithm to convert an amount of the currency to buy to the currency to sell with the help of their SDR values
      *
@@ -13,9 +11,9 @@ public class Calculator {
      * @return The converted amount
      */
 
-    static double convertingAmount(double amount, double buySDR, double sellSDR) {
+    public static double convertingAmount(double amount, double buySDR, double sellSDR) {
 
-        result = (amount / buySDR) * sellSDR;
+        double result = (amount / buySDR) * sellSDR;
         return Math.round(result * 100D) / 100D;
     }
 
@@ -26,7 +24,7 @@ public class Calculator {
      * @return Rounded amount to buy
      */
 
-    static double setAmountToBuy(double amount) {
+    public static double setAmountToBuy(double amount) {
 
         return Math.round(amount * 100D) / 100D;
     }

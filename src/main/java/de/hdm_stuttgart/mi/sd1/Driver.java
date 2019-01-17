@@ -13,6 +13,7 @@ public class Driver {
 
         try (Scanner menuInput = new Scanner(System.in)) {
             ScreenCleaner.clearScreen();
+
             //Endless loop to allow unlimited changes until break/exit
             while (true) {
 
@@ -27,9 +28,9 @@ public class Driver {
                 System.out.println("2: Select amount to be converted\n");
                 System.out.print("Please choose an option (>>x<< to exit): ");
 
-                String inputValue = menuInput.next();
+                String optionMode = menuInput.next();
 
-                switch (inputValue) {
+                switch (optionMode) {
 
                     //Select currencies to buy/sell
                     case "0":
@@ -48,10 +49,10 @@ public class Driver {
 
                             } else {
                                 //Read file and return content as Array
-                                String[] currArray = TextFileReader.readFile("Currencies.txt");
+                                String[] currencyArray = TextFileReader.readFile("Currencies.txt");
 
                                 //Search through the Array for the entered String from the user
-                                ArrayManager.foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
+                                ArrayManager.foundArray = ArrayManager.searchEnteredName(enteredName, currencyArray);
 
                                 //Depending on how much currencies found => different further actions
                                 // 1) If no currency found
@@ -60,7 +61,7 @@ public class Driver {
 
                                     // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
-                                    CurrencyManager.setCurrency(inputValue, ArrayManager.foundArray[0]);
+                                    CurrencyManager.setCurrency(optionMode, ArrayManager.foundArray[0]);
                                     ScreenCleaner.clearScreen();
                                     break;
 
@@ -83,16 +84,16 @@ public class Driver {
                                         System.out.print("\nSelect a currency by index: ");
 
                                         try {
-                                            int selectCurrency = menuInput.nextInt();
-                                            CurrencyManager.setCurrency(inputValue, ArrayManager.foundArray[selectCurrency]);
+                                            int selectIndex = menuInput.nextInt();
+                                            CurrencyManager.setCurrency(optionMode, ArrayManager.foundArray[selectIndex]);
 
                                             System.out.println("\n");
                                             ScreenCleaner.clearScreen();
                                             break;
 
-                                        } catch (IndexOutOfBoundsException i) {
+                                        } catch (IndexOutOfBoundsException e) {
                                             System.err.println("\nYour index is too high! Try again!");
-                                        } catch (InputMismatchException i) {
+                                        } catch (InputMismatchException e) {
                                             System.err.println("\nNot a valid Number! Try again!");
                                             menuInput.next();
                                         }
@@ -127,7 +128,7 @@ public class Driver {
 
                                     break;
 
-                                } catch (InputMismatchException i) {
+                                } catch (InputMismatchException e) {
                                     System.err.println("\nNot a valid amount! Try again!\n");
                                     menuInput.next();
                                 }
@@ -149,7 +150,7 @@ public class Driver {
                 }
             }
 
-        } catch (IOException i) {
+        } catch (IOException e) {
             System.err.println("Currencies.txt-file not found!");
         }
 
