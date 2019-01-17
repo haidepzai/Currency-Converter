@@ -81,6 +81,7 @@ public class CurrencyManager {
     /**
      * If both currencies are set => change the menu output
      */
+
     public static void setMenuOutput() {
 
         if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
