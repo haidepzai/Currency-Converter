@@ -44,7 +44,7 @@ public class Driver {
                         while (true) {
                             System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
                             String enteredName = menuInput.next();
-                            ScreenCleaner.clearScreen();
+                            //ScreenCleaner.clearScreen();
 
                             //Leave currency converter
                             if (enteredName.equals("xxx")) {
@@ -92,7 +92,7 @@ public class Driver {
 
                                             System.out.println("\n");
                                             break;
-
+                                            
                                         } catch (IndexOutOfBoundsException i) {
                                             System.err.println("Your index is too high! Try again!");
                                         } catch (InputMismatchException i) {
@@ -123,7 +123,6 @@ public class Driver {
                                     ScreenCleaner.clearScreen();
 
 
-
                                     //Flexible/Changeable user-menu
                                     double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
                                     double sellVal = ArrayManager.getCurrencyValue(CurrencyManager.sellCurrency);
@@ -143,11 +142,12 @@ public class Driver {
                             break;
                         }
 
-                        //Exit the currency converter
+                    //Exit the currency converter
                     case "x":
                         System.out.println("You have terminated the currency converter!");
                         System.exit(0);
 
+                    //Instantly wrong input leads to default-case
                     default:
                         System.out.println("Not a valid option! Try again!");
                         break;

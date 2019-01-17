@@ -34,8 +34,4 @@ public class TestCurrencyManager {
         assertEquals(249.237, ArrayManager.getCurrencyValue("Sri Lankan Rupee:   249.237"), 0.001);
     }
 
-    @Test(expected = IOException.class)
-    public void testIOException() throws IOException {
-        TextFileReader.readFile("Currencis.txt");
-    }
 }

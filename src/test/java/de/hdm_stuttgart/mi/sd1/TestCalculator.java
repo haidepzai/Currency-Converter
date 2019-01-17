@@ -5,7 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class TestCalculator {
+
     //Calculator-class tests:
+
     @Test
     public void testSetAmountToBuy() {
         assertEquals(23.45, Calculator.setAmountToBuy(23.446756), 0.001);
