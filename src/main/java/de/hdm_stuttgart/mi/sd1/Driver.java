@@ -17,11 +17,7 @@ public class Driver {
             //Endless loop to allow unlimited changes until break/exit
             while (true) {
 
-                //If both currencies are set => change the menu output
-                if (!CurrencyManager.toBuy2.equals("not set") && !CurrencyManager.toSell2.equals("not set")) {
-                    CurrencyManager.toBuy1 = "Buying " + CurrencyManager.amountToBuy + " of ";
-                    CurrencyManager.toSell1 = "Selling " + CurrencyManager.amountToSell + " of ";
-                }
+                CurrencyManager.setMenuOutput();
 
                 //Flexible/Changeable user-menu
                 System.out.println(CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
@@ -29,7 +25,7 @@ public class Driver {
                 System.out.println("+++++++++++++++++++++++++");
                 System.out.println("0: Select currency to buy");
                 System.out.println("1: Select currency to sell");
-                System.out.println("2: Select amount to be converted\n\n");
+                System.out.println("2: Select amount to be converted\n");
                 System.out.print("Please choose an option (>>x<< to exit): ");
 
                 String inputValue = menuInput.next();
@@ -44,7 +40,7 @@ public class Driver {
                         while (true) {
                             System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
                             String enteredName = menuInput.next();
-                            System.out.println("\n");
+                            System.out.println();
 
                             //Leave currency converter
                             if (enteredName.equals("xxx")) {
@@ -65,6 +61,7 @@ public class Driver {
 
                                     // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
+                                    ScreenCleaner.clearScreen();
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
@@ -84,20 +81,20 @@ public class Driver {
 
                                     //Selection of the found currencies
                                     while (true) {
-                                        System.out.println("\n");
-                                        System.out.print("Select a currency by index: ");
+                                        System.out.print("\nSelect a currency by index: ");
 
                                         try {
                                             int selectCurrency = menuInput.nextInt();
                                             CurrencyManager.setCurrency(inputValue, foundArray[selectCurrency]);
 
                                             System.out.println("\n");
+                                            ScreenCleaner.clearScreen();
                                             break;
 
                                         } catch (IndexOutOfBoundsException i) {
-                                            System.err.println("Your index is too high! Try again!");
+                                            System.err.println("\nYour index is too high! Try again!");
                                         } catch (InputMismatchException i) {
-                                            System.err.println("Not a valid Number!Try again!");
+                                            System.err.println("\nNot a valid Number! Try again!");
                                             menuInput.next();
                                         }
                                     }
@@ -106,7 +103,6 @@ public class Driver {
                                 }
                             }
                         }
-                        //ScreenCleaner.clearScreen();
                         break;
 
 
@@ -118,11 +114,9 @@ public class Driver {
                             while (true) {
                                 try {
                                     System.out.print("Enter an amount: ");
-
                                     double amount = menuInput.nextDouble();
-                                    System.out.println("\n");
+                                    System.out.println();
                                     ScreenCleaner.clearScreen();
-
 
                                     //Flexible/Changeable user-menu
                                     double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
@@ -135,7 +129,7 @@ public class Driver {
                                     break;
 
                                 } catch (InputMismatchException i) {
-                                    System.err.println("Not a valid amount! Try again!\n");
+                                    System.err.println("\nNot a valid amount! Try again!\n");
                                     menuInput.next();
                                 }
                             }
@@ -151,7 +145,7 @@ public class Driver {
                     //Instantly wrong input leads to default-case
                     default:
                         ScreenCleaner.clearScreen();
-                        System.out.println("Not a valid option! Try again!\n");
+                        System.err.println("Not a valid option! Try again!\n");
                         break;
                 }
             }

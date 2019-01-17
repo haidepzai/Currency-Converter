@@ -2,7 +2,7 @@ package de.hdm_stuttgart.mi.sd1;
 
 public class CurrencyManager {
 
-    static String toBuy1 = " Currency to buy: ";
+    static String toBuy1 = "Currency to buy : ";
     static String toSell1 = "Currency to sell: ";
     static String toBuy2 = "not set";
     static String toSell2 = "not set";
@@ -23,15 +23,16 @@ public class CurrencyManager {
 
     public static boolean checkCurrencies(String buyCurrency, String sellCurrency) {
 
-        ScreenCleaner.clearScreen();
-
         if (buyCurrency == null && sellCurrency == null) {
+            ScreenCleaner.clearScreen();
             System.out.println("You have to select a currency to buy and to sell first!\n");
             return true;
         } else if (sellCurrency == null) {
+            ScreenCleaner.clearScreen();
             System.out.println("You have to select a currency to sell first!\n");
             return true;
         } else if (buyCurrency == null) {
+            ScreenCleaner.clearScreen();
             System.out.println("You have to select a currency to buy first!\n");
             return true;
 
@@ -77,4 +78,15 @@ public class CurrencyManager {
         }
     }
 
+    /**
+     * If both currencies are set => change the menu output
+     */
+    public static void setMenuOutput() {
+
+        if (!toBuy2.equals("not set") && !toSell2.equals("not set")) {
+
+            toBuy1 = "Buying " + amountToBuy + " of ";
+            toSell1 = "Selling " + amountToSell + " of ";
+        }
+    }
 }
