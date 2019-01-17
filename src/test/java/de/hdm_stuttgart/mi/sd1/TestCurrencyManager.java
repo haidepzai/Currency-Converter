@@ -11,10 +11,10 @@ public class TestCurrencyManager {
 
     //CurrencyManager-class tests:
     @Test
-    public void testCheckCurrencies(){
-        assertTrue(CurrencyManager.checkCurrencies(null,null));
-        assertTrue(CurrencyManager.checkCurrencies("Euro:   1.2181",null));
-        assertTrue(CurrencyManager.checkCurrencies(null,"Euro:   1.2181"));
+    public void testCheckCurrencies() {
+        assertTrue(CurrencyManager.checkCurrencies(null, null));
+        assertTrue(CurrencyManager.checkCurrencies("Euro:   1.2181", null));
+        assertTrue(CurrencyManager.checkCurrencies(null, "Euro:   1.2181"));
         assertFalse(CurrencyManager.checkCurrencies("Euro:   1.2181", "Australian Dollar:   1.92771"));
 
     }
@@ -34,8 +34,4 @@ public class TestCurrencyManager {
         assertEquals(249.237, ArrayManager.getCurrencyValue("Sri Lankan Rupee:   249.237"), 0.001);
     }
 
-    @Test(expected = IOException.class)
-    public void testIOException() throws IOException {
-        TextFileReader.readFile("Currencis.txt");
-    }
 }

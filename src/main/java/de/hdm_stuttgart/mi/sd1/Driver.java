@@ -63,12 +63,12 @@ public class Driver {
                                 if (ArrayManager.nC == 0) {
                                     System.out.println("No suitable currencies found! Try again!\n");
 
-                                // 2) If just one currency found => found currencies directly added to menu output
+                                    // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
-                                // 3) If more than one currency is found
+                                    // 3) If more than one currency is found
                                 } else if (ArrayManager.nC >= 2) {
                                     ScreenCleaner.clearScreen();
                                     System.out.println(CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
@@ -124,7 +124,6 @@ public class Driver {
                                     ScreenCleaner.clearScreen();
 
 
-
                                     //Flexible/Changeable user-menu
                                     double buyVal = ArrayManager.getCurrencyValue(CurrencyManager.buyCurrency);
                                     double sellVal = ArrayManager.getCurrencyValue(CurrencyManager.sellCurrency);
@@ -144,11 +143,12 @@ public class Driver {
                             break;
                         }
 
-                        //Exit the currency converter
+                    //Exit the currency converter
                     case "x":
                         System.out.println("You have terminated the currency converter!");
                         System.exit(0);
 
+                    //Instantly wrong input leads to default-case
                     default:
                         ScreenCleaner.clearScreen();
                         System.out.println("Not a valid option! Try again!\n");
