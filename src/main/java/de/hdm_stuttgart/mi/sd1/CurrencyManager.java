@@ -23,15 +23,16 @@ public class CurrencyManager {
 
     public static boolean checkCurrencies(String buyCurrency, String sellCurrency) {
 
+        ScreenCleaner.clearScreen();
 
         if (buyCurrency == null && sellCurrency == null) {
-            System.out.println("\nYou have to select a currency to buy and to sell first!\n");
+            System.out.println("You have to select a currency to buy and to sell first!\n");
             return true;
         } else if (sellCurrency == null) {
-            System.out.println("\nYou have to select a currency to sell first!\n");
+            System.out.println("You have to select a currency to sell first!\n");
             return true;
         } else if (buyCurrency == null) {
-            System.out.println("\nYou have to select a currency to buy first!\n");
+            System.out.println("You have to select a currency to buy first!\n");
             return true;
 
         }

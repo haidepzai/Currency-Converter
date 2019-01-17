@@ -44,7 +44,7 @@ public class Driver {
                         while (true) {
                             System.out.print("Enter a currency's name or part of it(>>xxx<< to exit): ");
                             String enteredName = menuInput.next();
-                            ScreenCleaner.clearScreen();
+                            System.out.println("\n");
 
                             //Leave currency converter
                             if (enteredName.equals("xxx")) {
@@ -70,7 +70,8 @@ public class Driver {
 
                                 // 3) If more than one currency is found
                                 } else if (ArrayManager.nC >= 2) {
-                                    System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
+                                    ScreenCleaner.clearScreen();
+                                    System.out.println(CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                                     System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
                                     System.out.println("+++++++++++++++++++++++++");
 
@@ -102,10 +103,10 @@ public class Driver {
                                     }
 
                                     break;
-                                }ScreenCleaner.clearScreen();
-
+                                }
                             }
                         }
+                        //ScreenCleaner.clearScreen();
                         break;
 
 
@@ -135,7 +136,7 @@ public class Driver {
                                     break;
 
                                 } catch (InputMismatchException i) {
-                                    System.err.println("Not a valid amount! Try again!");
+                                    System.err.println("Not a valid amount! Try again!\n");
                                     menuInput.next();
                                 }
                             }
@@ -149,7 +150,8 @@ public class Driver {
                         System.exit(0);
 
                     default:
-                        System.out.println("Not a valid option! Try again!");
+                        ScreenCleaner.clearScreen();
+                        System.out.println("Not a valid option! Try again!\n");
                         break;
                 }
             }
@@ -157,5 +159,8 @@ public class Driver {
         } catch (IOException i) {
             System.err.println("Currencies.txt-file not found!");
         }
+
+        ScreenCleaner.clearScreen();
     }
+
 }
