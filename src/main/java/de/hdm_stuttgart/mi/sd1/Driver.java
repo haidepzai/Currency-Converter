@@ -63,12 +63,12 @@ public class Driver {
                                 if (ArrayManager.nC == 0) {
                                     System.out.println("No suitable currencies found! Try again!\n");
 
-                                // 2) If just one currency found => found currencies directly added to menu output
+                                    // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
                                     CurrencyManager.setCurrency(inputValue, foundArray[0]);
                                     break;
 
-                                // 3) If more than one currency is found
+                                    // 3) If more than one currency is found
                                 } else if (ArrayManager.nC >= 2) {
                                     System.out.println("\n" + CurrencyManager.toBuy1 + CurrencyManager.toBuy2);
                                     System.out.println(CurrencyManager.toSell1 + CurrencyManager.toSell2);
@@ -102,7 +102,8 @@ public class Driver {
                                     }
 
                                     break;
-                                }ScreenCleaner.clearScreen();
+                                }
+                                ScreenCleaner.clearScreen();
 
                             }
                         }
