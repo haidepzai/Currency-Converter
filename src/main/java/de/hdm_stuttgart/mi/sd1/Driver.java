@@ -1,13 +1,12 @@
 package de.hdm_stuttgart.mi.sd1;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class Driver {
-
-    static String[] foundArray;
 
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
@@ -56,7 +55,7 @@ public class Driver {
                                 String[] currArray = TextFileReader.readFile("Currencies.txt");
 
                                 //Search through the Array for the entered String from the user
-                                foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
+                                ArrayManager.foundArray = ArrayManager.searchEnteredName(enteredName, currArray);
 
                                 //Depending on how much currencies found => different further actions
                                 // 1) If no currency found
@@ -65,7 +64,7 @@ public class Driver {
 
                                     // 2) If just one currency found => found currencies directly added to menu output
                                 } else if (ArrayManager.nC == 1) {
-                                    CurrencyManager.setCurrency(inputValue, foundArray[0]);
+                                    CurrencyManager.setCurrency(inputValue, ArrayManager.foundArray[0]);
                                     break;
 
                                     // 3) If more than one currency is found
@@ -77,7 +76,7 @@ public class Driver {
 
                                     //Print out the Array of found currencies
                                     int t = 0;
-                                    for (String fA : foundArray) {
+                                    for (String fA : ArrayManager.foundArray) {
                                         System.out.println(t + ": " + ArrayManager.getCurrencyName(fA));
                                         t++;
                                     }
@@ -89,7 +88,7 @@ public class Driver {
 
                                         try {
                                             int selectCurrency = menuInput.nextInt();
-                                            CurrencyManager.setCurrency(inputValue, foundArray[selectCurrency]);
+                                            CurrencyManager.setCurrency(inputValue, ArrayManager.foundArray[selectCurrency]);
 
                                             System.out.println("\n");
                                             break;
@@ -143,12 +142,12 @@ public class Driver {
                             break;
                         }
 
-                    //Exit the currency converter
+                        //Exit the currency converter
                     case "x":
                         System.out.println("You have terminated the currency converter!");
                         System.exit(0);
 
-                    //Instantly wrong input leads to default-case
+                        //Instantly wrong input leads to default-case
                     default:
                         ScreenCleaner.clearScreen();
                         System.out.println("Not a valid option! Try again!\n");
